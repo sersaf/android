@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Laboratory work</string>
+    <string name="work">Laboratory work</string>
+    <string name="author">Author</string>
+    <string name="fio">Safonov Sergey</string>
+    <string name="reset">Reset</string>
+    <string name="group">M091601 (72)</string>
+    <string name="Rate">Оцените наше приложение</string>
+    <string name="thankForRate">Спасибо за ваш отзыв</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+    <string name="review">Отзыв отправляется</string>
+    <string name="indWork">Индивидуальное задание:11</string>
+</resources>
