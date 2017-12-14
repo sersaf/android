@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menuPurchasesListNewRecord"
+        android:icon="@drawable/ic_reorder_black_24dp"
+        android:orderInCategory="10"
+        android:title="menu"
+        app:showAsAction="always|withText">
+
+        <menu>
+
+            <group>
+                <item
+                    android:id="@+id/menuPurchasesListShare"
+                    android:enabled="true"
+                    android:title="Последняя запущенная лабораторная работа">
+
+
+                </item>
+            </group>
+        </menu>
+
+
+
+
+    </item>
+
+
+</menu>
