@@ -33,13 +33,4 @@
         app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteY="375dp" />
 
-    <ProgressBar
-        android:id="@+id/progressBarNEW"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="152dp"
-        tools:layout_editor_absoluteY="280dp"
-        tools:visibility="invisible" />
-
 </android.support.constraint.ConstraintLayout>

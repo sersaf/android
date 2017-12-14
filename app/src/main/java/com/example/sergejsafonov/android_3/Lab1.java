@@ -35,17 +35,6 @@ public class Lab1 extends AppCompatActivity {
         menu.add(Menu.NONE, MENU_RESET, Menu.NONE, R.string.reset);
     }
 
-    public void getAuthor(final String str) {
-        textView = (TextView) findViewById(R.id.textView);
-
-        textView.setText(str);
-
-    }
-
-    public void resetField(){
-        String text = getResources().getString(R.string.work);
-        textView.setText(text);
-    }
 
     @Override
     public boolean onContextItemSelected(MenuItem item)
@@ -68,6 +57,18 @@ public class Lab1 extends AppCompatActivity {
         }
         return super.onContextItemSelected(item);
 
+    }
+
+    public void getAuthor(final String str) {
+        textView = (TextView) findViewById(R.id.textView);
+
+        textView.setText(str);
+
+    }
+
+    public void resetField(){
+        String text = getResources().getString(R.string.work);
+        textView.setText(text);
     }
 
 }

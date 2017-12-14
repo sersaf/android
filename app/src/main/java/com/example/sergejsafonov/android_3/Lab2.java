@@ -14,7 +14,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import static java.lang.Thread.sleep;
 
 public class Lab2 extends AppCompatActivity {
     private TextView textView;
@@ -28,7 +32,7 @@ public class Lab2 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_lab2);
         View authorButton = (Button) findViewById(R.id.authorButton);
         registerForContextMenu(authorButton);
 
@@ -84,6 +88,11 @@ public class Lab2 extends AppCompatActivity {
             public void onClick(DialogInterface dialogInterface, int i) {
 
                 rateInProgress();
+                try {
+                    sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 showToast();
             }
 
@@ -95,15 +104,6 @@ public class Lab2 extends AppCompatActivity {
         AlertDialog alert = builder.create();
         alert.show();
 
-//        ProgressBar progressBar =  findViewById(R.id.progressBarNEW);
-//        progressBar.setVisibility(ProgressBar.VISIBLE);
-//        try {
-//            sleep(1000);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//
-//        progressBar.setVisibility(ProgressBar.INVISIBLE);
     }
 
     public void rateInProgress(){
@@ -116,7 +116,7 @@ public class Lab2 extends AppCompatActivity {
             @Override
             public void run(){
                 try {
-                    Thread.sleep(1500);
+                    sleep(1500);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -124,10 +124,15 @@ public class Lab2 extends AppCompatActivity {
 
             }
         }).start();
+
+
+
+
+
     }
 
     public void showToast(){
-//        Toast.makeText(this, R.string.thankForRate, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, R.string.thankForRate, Toast.LENGTH_SHORT).show();
     }
 
     @Override
