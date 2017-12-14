@@ -18,16 +18,41 @@
         </activity>
         <activity android:name=".Lab1"
             android:launchMode="singleTask"
-            />
+            android:label="Lab1"
+            android:parentActivityName=".MainActivity">
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value=".MainActivity" />
+        </activity>
+
         <activity android:name=".Lab2"
             android:launchMode="singleTask"
-            />
+            android:label="Lab2"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
         <activity android:name=".Lab3"
             android:launchMode="singleTask"
-            />
-        <activity android:name=".IndWork" />
+            android:label="Lab3"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+        <activity android:name=".IndWork"
+            android:launchMode="singleTask"
+            android:label="WebView"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
 
     </application>
     <uses-permission android:name="android.permission.INTERNET" />
+
+
 
 </manifest>

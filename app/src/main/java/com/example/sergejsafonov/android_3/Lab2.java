@@ -1,5 +1,6 @@
 package com.example.sergejsafonov.android_3;
 
+import android.app.ActionBar;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -36,7 +37,6 @@ public class Lab2 extends AppCompatActivity {
         View authorButton = (Button) findViewById(R.id.authorButton);
         registerForContextMenu(authorButton);
 
-        View indWork = (Button) findViewById(R.id.indWork);
     }
 
     @Override
