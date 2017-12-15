@@ -12,11 +12,10 @@ import android.widget.Button;
 
 import com.google.gson.Gson;
 
-//import static com.example.sergejsafonov.android_3.SharedPrefCreate.APP_PREFERENCES_ACTIVITY;
+import static com.example.sergejsafonov.android_3.SharedPrefCreate.APP_PREFERENCES_ACTIVITY;
 
 public class MainActivity extends AppCompatActivity {
 
-//    private static final String APP_PREFERENCES_ACTIVITY = "mylastactivity";
     SharedPreferences mSettings;
     SharedPrefCreate sharedPrefCreate;
 
@@ -24,10 +23,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mSettings = getSharedPreferences(APP_PREFERENCES_ACTIVITY, Context.MODE_PRIVATE);
+
 
         View btn_L1 = (Button) findViewById(R.id.btn_L1);
         View btn_L2 = (Button) findViewById(R.id.btn_L2);
         View btn_L3 = (Button) findViewById(R.id.btn_L3);
+
+
 
         View.OnClickListener oclBtnL1 = new View.OnClickListener() {
             @Override
@@ -66,47 +69,47 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
 
-//        mSettings = getSharedPreferences(APP_PREFERENCES_ACTIVITY, Context.MODE_PRIVATE);
+        // проверяем, первый ли раз открывается программа
+        boolean hasVisited = mSettings.getBoolean("hasVisited", false);
 
-//        sharedPrefCreate = new SharedPrefCreate(this.getClass(), mSettings);
-
-
-
-//        if(!mSettings.contains(APP_PREFERENCES_ACTIVITY)) {
-//            MenuItem shareMenuItem = menu.findItem(R.id.second_menu_actionbar);
-//            shareMenuItem.setVisible(false);
-//        }
+        if (!hasVisited) {
+            MenuItem lastactivity = menu.findItem(R.id.second_menu_actionbar);
+            MenuItem reset = menu.findItem(R.id.reset);
+            lastactivity.setVisible(false);
+            reset.setVisible(false);
+        }
 
         return true;
     }
 
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
+        sharedPrefCreate = new SharedPrefCreate(mSettings);
 
         switch (item.getItemId()) {
+
             case R.id.second_menu_actionbar:
 
 
-//                Class<?> cls = null;
-//                try {
-//                    cls = Class.forName(sharedPrefCreate.getSharedPref(APP_PREFERENCES_ACTIVITY));
-//                } catch (ClassNotFoundException e) {
-//                    e.printStackTrace();
-//                }
-//                Object obj = cls.newInstance();
+                Class<?>  myclass = null;
+                String name = sharedPrefCreate.getSharedPref(APP_PREFERENCES_ACTIVITY);
+                try {
+                    myclass = Class.forName(name);
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
 
-                Button btn = findViewById(R.id.btn_L3);
-//                btn.setText(sharedPrefCreate.getSharedPref(APP_PREFERENCES_ACTIVITY));
+                Intent intent = new Intent(this, myclass);
 
-
-//                Object object = new Gson().fromJson(sharedPrefCreate.getSharedPref(APP_PREFERENCES_ACTIVITY), Object.class);
-
-
-//                Intent intent = new Intent(MainActivity.this, sharedPrefCreate.getSharedPref(APP_PREFERENCES_ACTIVITY));
-//                startActivity(intent);
+                startActivity(intent);
 
                 return true;
+
+            case R.id.reset:
+                sharedPrefCreate.reset();
+
         }
 
         return super.onOptionsItemSelected(item);

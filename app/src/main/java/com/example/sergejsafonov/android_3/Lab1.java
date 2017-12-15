@@ -1,5 +1,8 @@
 package com.example.sergejsafonov.android_3;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,9 +13,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import static com.example.sergejsafonov.android_3.SharedPrefCreate.APP_PREFERENCES_ACTIVITY;
+
 public class Lab1 extends AppCompatActivity {
 
     private TextView textView;
+    SharedPreferences mSettings;
+    SharedPrefCreate sharedPrefCreate;
     public static final int MENU_AUTHOR = 1;
     public static final int MENU_RESET = 2;
 
@@ -20,6 +27,7 @@ public class Lab1 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lab1);
+        mSettings = getSharedPreferences(APP_PREFERENCES_ACTIVITY, Context.MODE_PRIVATE);
 
         View authorButton = (Button) findViewById(R.id.authorButton);
         registerForContextMenu(authorButton);
@@ -70,5 +78,63 @@ public class Lab1 extends AppCompatActivity {
         String text = getResources().getString(R.string.work);
         textView.setText(text);
     }
+
+
+
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+
+        sharedPrefCreate = new SharedPrefCreate("com.example.sergejsafonov.android_3.Lab1", mSettings);
+
+
+        // проверяем, первый ли раз открывается программа
+        boolean hasVisited = mSettings.getBoolean("hasVisited", false);
+
+        if (!hasVisited) {
+            MenuItem lastactivity = menu.findItem(R.id.second_menu_actionbar);
+            MenuItem reset = menu.findItem(R.id.reset);
+            lastactivity.setVisible(false);
+            reset.setVisible(false);
+            SharedPreferences.Editor e = mSettings.edit();
+            e.putBoolean("hasVisited", true);
+            e.apply();
+        }
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+
+        switch (item.getItemId()) {
+            case R.id.second_menu_actionbar:
+
+
+                Class<?>  myclass = null;
+                String name = sharedPrefCreate.getSharedPref(APP_PREFERENCES_ACTIVITY);
+                try {
+                    myclass = Class.forName(name);
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+
+                Intent intent = new Intent(this, myclass);
+
+                startActivity(intent);
+
+                return true;
+
+            case R.id.reset:
+                sharedPrefCreate.reset();
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+
 
 }
