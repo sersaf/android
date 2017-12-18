@@ -178,9 +178,22 @@ public class Lab2 extends AppCompatActivity {
             MenuItem reset = menu.findItem(R.id.reset);
             lastactivity.setVisible(false);
             reset.setVisible(false);
-            SharedPreferences.Editor e = mSettings.edit();
-            e.putBoolean("hasVisited", true);
-            e.apply();
+        }
+
+        return true;
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+
+        // проверяем, первый ли раз открывается программа
+        boolean hasVisited = mSettings.getBoolean("hasVisited", false);
+
+        if (!hasVisited) {
+            MenuItem lastactivity = menu.findItem(R.id.second_menu_actionbar);
+            MenuItem reset = menu.findItem(R.id.reset);
+            lastactivity.setVisible(false);
+            reset.setVisible(false);
         }
 
         return true;
@@ -210,8 +223,26 @@ public class Lab2 extends AppCompatActivity {
 
             case R.id.reset:
                 sharedPrefCreate.reset();
+                invalidateOptionsMenu();
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        SharedPreferences.Editor e = mSettings.edit();
+        e.putBoolean("hasVisited", true);
+        e.apply();
+
+        super.onBackPressed();
+    }
+
+    @Override
+    protected void onUserLeaveHint() {
+        SharedPreferences.Editor e = mSettings.edit();
+        e.putBoolean("hasVisited", true);
+        e.apply();
+        super.onUserLeaveHint();
     }
 }
